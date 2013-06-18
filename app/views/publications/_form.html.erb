@@ -1,0 +1,41 @@
+<%= form_for(@publication) do |f| %>
+  <% if @publication.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@publication.errors.count, "error") %> prohibited this publication from being saved:</h2>
+
+      <ul>
+      <% @publication.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :pub_date %><br />
+    <%= f.date_select :pub_date %>
+  </div>
+  <div class="field">
+    <%= f.label :bibtex %><br />
+    <%= f.text_area :bibtex %>
+  </div>
+  <div class="field">
+    <%= f.label :pubtype_id %><br />
+    <%= f.number_field :pubtype_id %>
+  </div>
+  <div class="field">
+    <%= f.label :html_title %><br />
+    <%= f.text_field :html_title %>
+  </div>
+  <div class="field">
+    <%= f.label :html_authors %><br />
+    <%= f.text_field :html_authors %>
+  </div>
+  <div class="field">
+    <%= f.label :html_reference %><br />
+    <%= f.text_field :html_reference %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

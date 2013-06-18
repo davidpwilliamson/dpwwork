@@ -1,0 +1,33 @@
+<h1>Listing publications</h1>
+
+<table>
+  <tr>
+    <th>Pub date</th>
+    <th>Bibtex</th>
+    <th>Pubtype</th>
+    <th>Html title</th>
+    <th>Html authors</th>
+    <th>Html reference</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @publications.each do |publication| %>
+  <tr>
+    <td><%= publication.pub_date %></td>
+    <td><%= publication.bibtex %></td>
+    <td><%= publication.pubtype_id %></td>
+    <td><%= publication.html_title %></td>
+    <td><%= publication.html_authors %></td>
+    <td><%= publication.html_reference %></td>
+    <td><%= link_to 'Show', publication %></td>
+    <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
+    <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Publication', new_publication_path %>

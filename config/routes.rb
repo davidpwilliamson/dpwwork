@@ -1,4 +1,21 @@
 Dpwwork::Application.routes.draw do
+  
+  devise_for :users
+
+  ComfortableMexicanSofa::Routing.admin(:path => '/cms-admin')
+  
+  # Make sure this routeset is defined last
+  ComfortableMexicanSofa::Routing.content(:path => '/', :sitemap => false)
+
+  resources :categories
+
+
+  resources :talks
+
+
+  resources :publications
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

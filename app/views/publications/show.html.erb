@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Pub date:</b>
+  <%= @publication.pub_date %>
+</p>
+
+<p>
+  <b>Bibtex:</b>
+  <%= @publication.bibtex %>
+</p>
+
+<p>
+  <b>Pubtype:</b>
+  <%= @publication.pubtype_id %>
+</p>
+
+<p>
+  <b>Html title:</b>
+  <%= @publication.html_title %>
+</p>
+
+<p>
+  <b>Html authors:</b>
+  <%= @publication.html_authors %>
+</p>
+
+<p>
+  <b>Html reference:</b>
+  <%= @publication.html_reference %>
+</p>
+
+
+<%= link_to 'Edit', edit_publication_path(@publication) %> |
+<%= link_to 'Back', publications_path %>
