@@ -1,0 +1,20 @@
+<li>
+<% unless talk.talklinks.empty? %>
+  	<%= link_to(sanitize(talk.title), talk.talklinks.first.url) %>
+<% else %>
+ 	<%= sanitize talk.title %>
+<% end %>
+<p><%= sanitize talk.institution + ". " + talk.location + ". " %></p>
+<% unless talk.note.empty? %>
+	<p><%= sanitize talk.note + ". " %>
+<% end %>
+<p> <%= talk.talk_date.strftime("%B %d, %Y") + ". " %></p>
+<% unless talk.talklinks.empty? %>
+  <ul>
+    <% for talklink in talk.talklinks %>
+      <li><%= link_to(talklink.talklinktype.name, talklink.url) %></li>  
+    <% end %>
+  </ul>
+<% end %>
+</li>
+

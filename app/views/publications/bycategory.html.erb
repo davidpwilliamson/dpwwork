@@ -1,0 +1,25 @@
+<% content_for :pagename, "pubs" %>
+
+<div id="bycategory">
+<%= render "shared/pubnavbar" %>
+</div>
+
+
+<div id="content">
+<h1 id="pubheader">Publications</h1>
+<div class="pubs">
+
+
+<% for category in @categories %>
+  <% if !category.publications.empty? %>
+    <h2><%= category.name %></h2> <hr />
+    <ul>
+      <% sortedpubs = category.publications.sort { |a, b| b.pub_date <=> a.pub_date } %>
+      <%= render(sortedpubs) %>
+    </ul>
+  <% end %>
+<% end %>
+</div>
+</div>
+
+

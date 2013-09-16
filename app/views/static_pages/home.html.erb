@@ -1,0 +1,28 @@
+<% content_for :pagename, "home" %>
+
+<div id="content">
+  
+<div id="recentbar">
+<div class="recent">
+<h1>Recent Publications</h1>
+<div class="pubs">
+<ul>
+<%= render(@publications) %>
+</ul>
+</div>
+</div>
+<div class="recent">
+<h1>Recent Talks</h1>
+<div class="talks">
+<ul>
+<%= render(@talks) %>
+</ul>
+</div>
+</div>
+</div>
+
+
+<%= raw(@content) %>
+
+</div>
+

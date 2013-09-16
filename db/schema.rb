@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130618030113) do
+ActiveRecord::Schema.define(:version => 20130916001126) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -24,122 +24,21 @@ ActiveRecord::Schema.define(:version => 20130618030113) do
     t.integer "publication_id", :null => false
   end
 
-  create_table "cms_blocks", :force => true do |t|
-    t.integer  "page_id",                        :null => false
-    t.string   "identifier",                     :null => false
-    t.text     "content",    :limit => 16777215
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+  create_table "ckeditor_assets", :force => true do |t|
+    t.string   "data_file_name",                  :null => false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    :limit => 30
+    t.string   "type",              :limit => 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
-  add_index "cms_blocks", ["page_id", "identifier"], :name => "index_cms_blocks_on_page_id_and_identifier"
-
-  create_table "cms_categories", :force => true do |t|
-    t.integer "site_id",          :null => false
-    t.string  "label",            :null => false
-    t.string  "categorized_type", :null => false
-  end
-
-  add_index "cms_categories", ["site_id", "categorized_type", "label"], :name => "index_cms_categories_on_site_id_and_categorized_type_and_label", :unique => true
-
-  create_table "cms_categorizations", :force => true do |t|
-    t.integer "category_id",      :null => false
-    t.string  "categorized_type", :null => false
-    t.integer "categorized_id",   :null => false
-  end
-
-  add_index "cms_categorizations", ["category_id", "categorized_type", "categorized_id"], :name => "index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id", :unique => true
-
-  create_table "cms_files", :force => true do |t|
-    t.integer  "site_id",                                          :null => false
-    t.integer  "block_id"
-    t.string   "label",                                            :null => false
-    t.string   "file_file_name",                                   :null => false
-    t.string   "file_content_type",                                :null => false
-    t.integer  "file_file_size",                                   :null => false
-    t.string   "description",       :limit => 2048
-    t.integer  "position",                          :default => 0, :null => false
-    t.datetime "created_at",                                       :null => false
-    t.datetime "updated_at",                                       :null => false
-  end
-
-  add_index "cms_files", ["site_id", "block_id"], :name => "index_cms_files_on_site_id_and_block_id"
-  add_index "cms_files", ["site_id", "file_file_name"], :name => "index_cms_files_on_site_id_and_file_file_name"
-  add_index "cms_files", ["site_id", "label"], :name => "index_cms_files_on_site_id_and_label"
-  add_index "cms_files", ["site_id", "position"], :name => "index_cms_files_on_site_id_and_position"
-
-  create_table "cms_layouts", :force => true do |t|
-    t.integer  "site_id",                                           :null => false
-    t.integer  "parent_id"
-    t.string   "app_layout"
-    t.string   "label",                                             :null => false
-    t.string   "identifier",                                        :null => false
-    t.text     "content",    :limit => 16777215
-    t.text     "css",        :limit => 16777215
-    t.text     "js",         :limit => 16777215
-    t.integer  "position",                       :default => 0,     :null => false
-    t.boolean  "is_shared",                      :default => false, :null => false
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
-  end
-
-  add_index "cms_layouts", ["parent_id", "position"], :name => "index_cms_layouts_on_parent_id_and_position"
-  add_index "cms_layouts", ["site_id", "identifier"], :name => "index_cms_layouts_on_site_id_and_identifier", :unique => true
-
-  create_table "cms_pages", :force => true do |t|
-    t.integer  "site_id",                                               :null => false
-    t.integer  "layout_id"
-    t.integer  "parent_id"
-    t.integer  "target_page_id"
-    t.string   "label",                                                 :null => false
-    t.string   "slug"
-    t.string   "full_path",                                             :null => false
-    t.text     "content",        :limit => 16777215
-    t.integer  "position",                           :default => 0,     :null => false
-    t.integer  "children_count",                     :default => 0,     :null => false
-    t.boolean  "is_published",                       :default => true,  :null => false
-    t.boolean  "is_shared",                          :default => false, :null => false
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
-  end
-
-  add_index "cms_pages", ["parent_id", "position"], :name => "index_cms_pages_on_parent_id_and_position"
-  add_index "cms_pages", ["site_id", "full_path"], :name => "index_cms_pages_on_site_id_and_full_path"
-
-  create_table "cms_revisions", :force => true do |t|
-    t.string   "record_type",                     :null => false
-    t.integer  "record_id",                       :null => false
-    t.text     "data",        :limit => 16777215
-    t.datetime "created_at"
-  end
-
-  add_index "cms_revisions", ["record_type", "record_id", "created_at"], :name => "index_cms_revisions_on_record_type_and_record_id_and_created_at"
-
-  create_table "cms_sites", :force => true do |t|
-    t.string  "label",                          :null => false
-    t.string  "identifier",                     :null => false
-    t.string  "hostname",                       :null => false
-    t.string  "path"
-    t.string  "locale",      :default => "en",  :null => false
-    t.boolean "is_mirrored", :default => false, :null => false
-  end
-
-  add_index "cms_sites", ["hostname"], :name => "index_cms_sites_on_hostname"
-  add_index "cms_sites", ["is_mirrored"], :name => "index_cms_sites_on_is_mirrored"
-
-  create_table "cms_snippets", :force => true do |t|
-    t.integer  "site_id",                                           :null => false
-    t.string   "label",                                             :null => false
-    t.string   "identifier",                                        :null => false
-    t.text     "content",    :limit => 16777215
-    t.integer  "position",                       :default => 0,     :null => false
-    t.boolean  "is_shared",                      :default => false, :null => false
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
-  end
-
-  add_index "cms_snippets", ["site_id", "identifier"], :name => "index_cms_snippets_on_site_id_and_identifier", :unique => true
-  add_index "cms_snippets", ["site_id", "position"], :name => "index_cms_snippets_on_site_id_and_position"
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
   create_table "publications", :force => true do |t|
     t.date     "pub_date"
@@ -152,6 +51,47 @@ ActiveRecord::Schema.define(:version => 20130618030113) do
     t.datetime "updated_at",     :null => false
   end
 
+  create_table "publinks", :force => true do |t|
+    t.string   "url"
+    t.string   "publinktype_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "publication_id"
+  end
+
+  create_table "publinktypes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "pubtypes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "static_pages", :force => true do |t|
+    t.string   "name"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "talklinks", :force => true do |t|
+    t.string   "url"
+    t.integer  "talklinktype_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "talk_id"
+  end
+
+  create_table "talklinktypes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "talks", :force => true do |t|
     t.string   "title"
     t.string   "institution"
@@ -159,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20130618030113) do
     t.date     "talk_date"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "note"
   end
 
   create_table "users", :force => true do |t|

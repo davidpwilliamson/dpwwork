@@ -1,0 +1,23 @@
+<h1>Listing publinktypes</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @publinktypes.each do |publinktype| %>
+  <tr>
+    <td><%= publinktype.name %></td>
+    <td><%= link_to 'Show', publinktype %></td>
+    <td><%= link_to 'Edit', edit_publinktype_path(publinktype) %></td>
+    <td><%= link_to 'Destroy', publinktype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Publinktype', new_publinktype_path %>

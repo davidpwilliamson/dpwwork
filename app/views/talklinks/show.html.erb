@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Url:</b>
+  <%= @talklink.url %>
+</p>
+
+<p>
+  <b>Talklinktype:</b>
+  <%= @talklink.talklinktype_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_talklink_path(@talklink) %> |
+<%= link_to 'Back', talklinks_path %>

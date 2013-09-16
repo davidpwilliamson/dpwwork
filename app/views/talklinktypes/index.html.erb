@@ -1,0 +1,23 @@
+<h1>Listing talklinktypes</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @talklinktypes.each do |talklinktype| %>
+  <tr>
+    <td><%= talklinktype.name %></td>
+    <td><%= link_to 'Show', talklinktype %></td>
+    <td><%= link_to 'Edit', edit_talklinktype_path(talklinktype) %></td>
+    <td><%= link_to 'Destroy', talklinktype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Talklinktype', new_talklinktype_path %>

@@ -1,0 +1,21 @@
+<%= form_for(@talklinktype) do |f| %>
+  <% if @talklinktype.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@talklinktype.errors.count, "error") %> prohibited this talklinktype from being saved:</h2>
+
+      <ul>
+      <% @talklinktype.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

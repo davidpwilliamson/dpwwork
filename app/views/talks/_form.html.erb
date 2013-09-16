@@ -24,10 +24,25 @@
     <%= f.text_field :location %>
   </div>
   <div class="field">
+    <%= f.label :note %><br />
+    <%= f.text_field :note %>
+  </div>
+  <div class="field">
     <%= f.label :talk_date %><br />
     <%= f.date_select :talk_date %>
   </div>
+  <div class="field">
+    <%= f.label :talklinks %><br />
+    <%= f.fields_for :talklinks do |pl| %>
+      <%= pl.collection_select(:talklinktype_id, Talklinktype.all, :id, :name, :include_blank => true) %>
+      <%= pl.label :url %>
+      <%= pl.text_field :url %>
+      <%= pl.check_box :_destroy %>
+      <%= pl.label :_destroy, 'delete' %><br />
+    <% end %>
   <div class="actions">
+    <%= f.submit "Add link", :name => "add_link" %>
+    <%= f.submit "Delete checked links", :name => "remove_link" %><br /><br />
     <%= f.submit %>
   </div>
 <% end %>

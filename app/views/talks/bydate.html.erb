@@ -1,0 +1,17 @@
+<% content_for :pagename, "talks" %>
+
+<div id="content">
+<h1 id="talkheader">Talks</h1>
+  
+<div class="talks">
+
+<% @talkyears.each do |year, talks| %>
+<h2><%= year %></h2><hr />
+    
+    <ul>
+    <%= render(talks) %>
+    </ul>
+<% end %>
+
+</div>
+</div>

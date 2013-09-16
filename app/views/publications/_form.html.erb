@@ -11,18 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :pub_date %><br />
-    <%= f.date_select :pub_date %>
-  </div>
-  <div class="field">
-    <%= f.label :bibtex %><br />
-    <%= f.text_area :bibtex %>
-  </div>
-  <div class="field">
-    <%= f.label :pubtype_id %><br />
-    <%= f.number_field :pubtype_id %>
-  </div>
+
   <div class="field">
     <%= f.label :html_title %><br />
     <%= f.text_field :html_title %>
@@ -35,7 +24,37 @@
     <%= f.label :html_reference %><br />
     <%= f.text_field :html_reference %>
   </div>
+  <div class="field">
+    <%= f.label :pub_date %><br />
+    <%= f.date_select(:pub_date, :start_year => 1990) %>
+  </div>
+  <div class="field">
+    <%= f.label :pubtype_id %><br />
+    <%= collection_select(:publication, :pubtype_id, Pubtype.all, :id, :name, :prompt => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :bibtex %><br />
+    <%= f.text_area :bibtex %>
+  </div>
+  <div class="field">
+    <%= f.label :categories %><br />
+    <% for category in @categories do %>
+      <%= check_box_tag "publication[category_ids][]", category.id, @publication.categories.include?(category) %>
+      <%= category.name %><br/>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :publinks %><br />
+    <%= f.fields_for :publinks do |pl| %>
+      <%= pl.collection_select(:publinktype_id, Publinktype.all, :id, :name, :include_blank => true) %>
+      <%= pl.label :url %>
+      <%= pl.text_field :url %>
+      <%= pl.check_box :_destroy %>
+      <%= pl.label :_destroy, 'delete' %><br />
+    <% end %>
   <div class="actions">
+    <%= f.submit "Add link", :name => "add_link" %>
+    <%= f.submit "Delete checked links", :name => "remove_link" %><br /><br />
     <%= f.submit %>
   </div>
 <% end %>

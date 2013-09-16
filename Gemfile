@@ -6,13 +6,13 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development, :test do
-	gem 'sqlite3'
+	gem 'mysql'
 	gem 'rspec-rails'
 	gem 'capybara'
 end
 
 group :production do
-	gem 'pg'
+	gem 'mysql'
 end
 
 # Gems used only for assets and not required
@@ -28,9 +28,10 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
-gem 'comfortable_mexican_sofa'
+gem 'paperclip'
+gem 'ckeditor'
 gem 'devise'
+gem 'yaml_db'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

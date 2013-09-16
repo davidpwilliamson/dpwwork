@@ -1,0 +1,25 @@
+<%= form_for(@publink) do |f| %>
+  <% if @publink.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@publink.errors.count, "error") %> prohibited this publink from being saved:</h2>
+
+      <ul>
+      <% @publink.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </div>
+  <div class="field">
+    <%= f.label :publinktype_id %><br />
+    <%= f.text_field :publinktype_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

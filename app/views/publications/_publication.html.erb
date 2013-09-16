@@ -1,0 +1,17 @@
+
+<li>
+<% unless publication.publinks.empty? %>
+  <%= link_to(sanitize(publication.html_title), publication.publinks.first.url) %>
+<% else %>
+ <%= sanitize publication.html_title %>
+<% end %>
+<p><%= sanitize publication.html_authors %></p>
+<p><%= sanitize publication.html_reference %></p>
+<% unless publication.publinks.empty? %>
+  <ul>
+    <% for publink in publication.publinks %>
+      <li><%= link_to(publink.publinktype.name, publink.url) %></li>  
+    <% end %>
+  </ul>
+<% end %>
+</li>

@@ -1,0 +1,23 @@
+<% content_for :pagename, "pubs" %>
+
+<div id="bydate">
+<%= render "shared/pubnavbar" %>
+</div>
+
+<div id="content">
+<h1 id="pubheader">Publications</h1>
+  
+<div class="pubs">
+
+<% @pubyears.each do |year, publications| %>
+<h2><%= year %></h2><hr />
+    
+    <ul>
+    <%= render(publications) %>
+    </ul>
+<% end %>
+
+</div>
+</div>
+
+

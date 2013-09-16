@@ -1,20 +1,51 @@
 Dpwwork::Application.routes.draw do
   
+  get "models/index"
+
+
+  resources :talklinktypes
+
+
+  resources :talklinks
+
+
+  resources :publinktypes
+
+
+  resources :publinks
+
+
+  resources :pubtypes
+
+
+  mount Ckeditor::Engine => '/ckeditor'
+
+  resources :static_pages
+
+
   devise_for :users
 
-  ComfortableMexicanSofa::Routing.admin(:path => '/cms-admin')
-  
-  # Make sure this routeset is defined last
-  ComfortableMexicanSofa::Routing.content(:path => '/', :sitemap => false)
 
   resources :categories
 
 
-  resources :talks
+  resources :talks do
+    get :bydate, :on => :collection
+  end
 
 
-  resources :publications
+  resources :publications do
+    get :bydate, :on => :collection
+    get :bytype, :on => :collection
+    get :bycategory, :on => :collection
+  end
 
+  match "/home" => "static_pages#home", :as => :home
+  match "/courses" => "static_pages#courses", :as => :courses
+  match "/contact" => "static_pages#contact", :as => :contact
+  #match "/models" => "models/index", :as => :index
+
+  root :to => "static_pages#home"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
